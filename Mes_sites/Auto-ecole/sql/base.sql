@@ -32,3 +32,20 @@ CREATE TABLE vehicules (
                            annee INT,
                            categorie VARCHAR(50) -- citadine, moto, utilitaire...
 );
+
+CREATE TABLE lecons (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        eleve_id INT NOT NULL,
+                        moniteur_id INT NOT NULL,
+                        date_heure DATETIME NOT NULL,
+                        duree_min INT NOT NULL DEFAULT 60,
+                        commentaire VARCHAR(255),
+
+                        CONSTRAINT fk_lecon_eleve
+                            FOREIGN KEY (eleve_id) REFERENCES eleves(id)
+                                ON DELETE CASCADE,
+
+                        CONSTRAINT fk_lecon_moniteur
+                            FOREIGN KEY (moniteur_id) REFERENCES moniteurs(id)
+                                ON DELETE RESTRICT
+);
